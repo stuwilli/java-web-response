@@ -3,7 +3,11 @@ package org.websure.web.response;
 import java.util.Map;
 
 public class ErrorResponse extends AbstractResponse implements Response<Object>{
-
+	
+	public ErrorResponse(int status) {
+		super(status);
+	}
+	
 	public ErrorResponse(int status, String key, String val) {
 		super(status);
 		this.addError(key, val);
