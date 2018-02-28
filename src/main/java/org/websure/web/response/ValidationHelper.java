@@ -25,7 +25,7 @@ public class ValidationHelper<T> {
 		
 		if (!violations.isEmpty()) {
 			
-			ErrorResponse err = new ErrorResponse(401);
+			ErrorResponse err = new ErrorResponse(400);
 			
 			for (ConstraintViolation<T> violation : this.violations) {
 				
