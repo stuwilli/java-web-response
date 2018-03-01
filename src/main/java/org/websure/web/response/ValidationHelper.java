@@ -1,5 +1,7 @@
 package org.websure.web.response;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -17,6 +19,34 @@ public class ValidationHelper<T> {
 	
 	public ValidationHelper(Validator v) {
 		this.validator = v;
+	}
+	
+	public ErrorResponse validateOncePerProperty(T obj) {
+		
+		violations = validator.validate(obj);
+		
+		if (!violations.isEmpty()) {
+			
+			Map<String, String> errors = new HashMap<>();
+			
+			for (ConstraintViolation<T> violation : this.violations) {
+				
+				String key = violation.getPropertyPath().toString();
+				
+				if (!errors.containsKey(key)) {
+					
+					errors.put(key, violation.getMessage());
+					logger.debug(violation.getMessage());
+				}
+				
+			}
+			
+			ErrorResponse err = new ErrorResponse(400, errors);
+			
+			return err;
+		}	
+		
+		return null;
 	}
 	
 	public ErrorResponse validate(T obj) {
@@ -37,6 +67,6 @@ public class ValidationHelper<T> {
 		}	
 		
 		return null;
-	}
+	}	
 	
 }
