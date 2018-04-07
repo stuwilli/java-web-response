@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
 group = 'org.websure.web'
-version = '0.0.4-SNAPSHOT'
+version = '0.0.5-SNAPSHOT'
 sourceCompatibility = 1.8
 
 // In this section you declare where to find the dependencies of your project
